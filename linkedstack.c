@@ -80,7 +80,6 @@ head=ptr->next;
 free(ptr);
 printf("value poped\n");
 }
-
 return head;
 }
 
