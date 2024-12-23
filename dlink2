@@ -1,0 +1,107 @@
+/*to implemenmt the following operation on dd
+creation
+searching
+count no.of nodes
+traverse 9/12/24
+*/
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+struct node *next;
+struct node *prev;
+int data;
+}node;
+struct node * create(int n)
+{
+struct node *head=NULL;
+struct node *p=NULL;
+struct node *t=NULL;
+int v;
+for(int i=1;i<=n;i++)
+{
+   t=(struct node*)malloc(sizeof(struct node));
+   printf("enter value to insert\n");
+   scanf("%d",&v);
+   t->data=v;
+   t->next=NULL;
+   t->prev=NULL;
+   if (head==NULL)
+   {
+   head=t;
+   }
+   else
+   {
+   p=head;
+   while(p->next!=NULL)
+   {
+   p=p->next;
+   }
+   t->prev=p;
+   p->next=t;
+   }
+   }
+return head;
+ }
+ void search(struct node* head)
+ { int s,k=0;
+ printf("\n enter value to search \n");
+ scanf("%d",&s);
+ struct node* p=NULL;
+ p=head;
+ while(p!=NULL)
+ {
+ if(p->data==s)
+ {
+ k=1;
+ break;
+ }
+ p=p->next;
+ }
+ if(k==1)
+ printf("\n value %d is found",s);
+ else
+ printf("\n value %d is not found",s);
+ }
+ 
+void display(struct node* head)
+{int c=0;
+struct node *t=NULL;
+struct node *p=head;
+while(p!=NULL)
+{
+printf("%d -> ",p->data);
+t=p;
+p=p->next;
+c=c+1;
+}
+printf("in backward ");
+while(t!=NULL)
+{
+printf("%d -> ",t->data);
+t=t->prev;
+}
+printf("no of nodes is : %d" ,c);
+}
+void main()
+{
+int n,ch;
+printf("enter size \n");
+scanf("%d",&n);
+struct node *h=create(n);
+printf("\n MENU \n 1.display \n 2.search \n 3. exit");
+printf("\n Enter your choice\n");
+scanf("%d",&ch);
+do 
+{
+switch(ch)
+{
+case 1 : display(h);break;
+case 2: search(h);break;
+default: printf("invalid ");break;
+}
+printf("\n Enter your choice\n");
+scanf("%d",&ch);
+}while(ch!=3);
+}
+

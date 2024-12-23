@@ -1,0 +1,167 @@
+//16-12-24
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+struct node *next;
+struct node *prev;
+int data;
+}node;
+struct node * create(int n)
+{
+struct node *head=NULL;
+struct node *p=NULL;
+struct node *t=NULL;
+int v;
+for(int i=1;i<=n;i++)
+{
+   t=(struct node*)malloc(sizeof(struct node));
+   printf("enter value to insert\n");
+   scanf("%d",&v);
+   t->data=v;
+   t->next=NULL;
+   t->prev=NULL;
+   if (head==NULL)
+   {
+   head=t;
+   }
+   else
+   {
+   p=head;
+   while(p->next!=NULL)
+   {
+   p=p->next;
+   }
+   t->prev=p;
+   p->next=t;
+   }
+   }
+return head;
+ }
+struct node* front(struct node *head)
+{ struct node *t=NULL;
+int v;
+t=(struct node*)malloc(sizeof(struct node));
+t->prev=NULL;
+   printf("enter value to insert in begining\n");
+   scanf("%d",&v);
+   t->data=v;
+   t->next=head;
+   head->prev=t;
+   head=t;
+   return head;
+}
+void end(struct node *head)
+{ int v;
+struct node *t=NULL;
+struct node *p=head;
+t=(struct node*)malloc(sizeof(struct node));
+ printf("enter value to insert at end\n");
+   scanf("%d",&v);
+   t->data=v;
+   t->next=NULL;
+while(p->next!=NULL)
+{
+p=p->next;
+}
+p->next=t;
+t->prev=p;
+}
+void middle(struct node *head)
+{ int po,v;
+struct node *t=NULL;
+struct node *p=head;
+t=(struct node*)malloc(sizeof(struct node));
+ printf("enter value to insert in between\n");
+   scanf("%d",&v);
+   printf("enter position to insert\n");
+   scanf("%d",&po);
+   t->data=v;
+for(int i=1;i<(po-1);i++)
+{
+p=p->next;
+}
+t->next=p->next;
+p->next->prev=t;
+p->next=t;
+}
+struct node* frontd(struct node *head)
+{ struct node *t=NULL;
+t=head;
+head=head->next;
+head->prev=NULL;
+free(t);
+   return head;
+}
+void endd(struct node *head)
+{ struct node *t=NULL;
+struct node *p=head;
+while(p->next!=NULL)
+{ t=p;
+p=p->next;
+}
+t->next=NULL;
+p->prev=NULL;
+}
+void middled(struct node *head)
+{ int po,v;
+struct node *p=head;
+struct node *t=NULL;
+   printf("enter position to delete\n");
+   scanf("%d",&po);
+for(int i=1;i<=(po-1);i++)
+{ t=p;
+p=p->next;
+}
+t->next=p->next;
+p->next->prev=t;
+}
+
+void display(struct node* head)
+{int c=0;
+struct node *t=NULL;
+struct node *p=head;
+while(p!=NULL)
+{
+printf("%d -> ",p->data);
+t=p;
+p=p->next;
+c=c+1;
+}
+printf("in backward ");
+while(t!=NULL)
+{
+printf("%d -> ",t->data);
+t=t->prev;
+}
+printf("no of nodes is : %d" ,c);
+}
+void main()
+{
+int n,ch;
+printf("enter size \n");
+scanf("%d",&n);
+struct node *h=create(n);
+printf("\n MENU \n 1.insert at start \n 2.insert at end \n 3.insert middle\n4.delete at start \n 5.delete at end \n 6.deletion at a specified position\n7.display \n 8. exit\n");
+printf("\n Enter your choice\n");
+scanf("%d",&ch);
+do 
+{
+switch(ch)
+{
+case 1 : printf("insert at start\n");h=front(h);break;
+case 2: printf("insert at end\n"); end(h);break;
+case 3: printf("insert in between\n");middle(h);break;
+case 4:h=frontd(h);break;
+case 5:endd(h);break;
+case 6:middled(h);break;
+case 7:printf("elements are \n");display(h);break;
+default: printf("invalid ");break;
+}
+printf("\n Enter your choice\n");
+scanf("%d",&ch);
+}while(ch!=8);
+}
+
+
+
