@@ -10,7 +10,7 @@ int queue[20],ch;
 do
 {
 printf("Queue Operations\n1.Enqueue\n2.Dequeue\n3.Display\n4.Exit\n");
-printf("\nchoose an operation:\n");
+printf("choose an operation:\n");
 scanf("%d",&ch);
 switch(ch)
 {
@@ -22,7 +22,7 @@ case 3:display(queue);
 break;
 case 4:printf("exit\n");
 break;
-default:printf("\nenter correct value\n\n");
+default:printf("enter correct value\n");
 break;
 }
 }while(ch!=4);
@@ -33,7 +33,7 @@ void enqueue(int *queue)
 int item;
 if(rear==size-1)
 {
-printf("\nQueue Overflow\n");
+printf("Queue Overflow\n");
 }
 else 
 {
@@ -48,7 +48,7 @@ else
 rear=rear+1;
 }
 queue[rear]=item;
-printf("\nvalue inserted\n");
+printf("value inserted\n");
 }
 printf("\n");
 }
@@ -57,7 +57,7 @@ void dequeue(int *queue)
 {
 if(front==-1 && rear==-1)
 {
-printf("\nQueue underflow\n");
+printf("Queue underflow\n");
 }
 else 
 {
@@ -69,7 +69,7 @@ else
 {
 front=front+1;
 }
-printf("\nvalue deleted\n");
+printf("value deleted\n");
 }
 printf("\n");
 }
@@ -79,7 +79,7 @@ void display(int *queue)
 int i; 
 if(rear==-1)
 {
-printf("\nqueue empty\n");
+printf("queue empty\n");
 }
 else
 {
