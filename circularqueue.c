@@ -63,7 +63,7 @@ void dequeue(int *queue)
 {
 if(count==0)
 {
-printf("\nQueue underflow\n");
+printf("Queue underflow\n");
 }
 else 
 {
@@ -76,7 +76,7 @@ else
 front=(front+1)%size;
 }
 count=count-1;
-printf("\nvalue deleted\n");
+printf("value deleted\n");
 }
 printf("\n");
 }
@@ -86,7 +86,7 @@ void display(int *queue)
 int i; 
 if(count==0)
 {
-printf("\nqueue empty\n");
+printf("queue empty\n");
 }
 else
 {
