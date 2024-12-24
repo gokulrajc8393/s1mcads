@@ -40,7 +40,7 @@ return head;
 }
 struct node* deleteatfront(struct node* head);
 struct node* deleteatlast(struct node* head);
-struct node* deleteatpos(struct node* head,int pos);
+struct node* deleteatpos(struct node* head);
 void traverse(struct node* head);
 void main()
 {
@@ -69,9 +69,7 @@ break;
 }
 case 3:
 {
-printf("enter position\n");
-scanf("%d",&pos);
-head=deleteatpos(head,pos);
+head=deleteatpos(head);
 break;
 }
 case 4:
@@ -134,11 +132,13 @@ free(ptr);
 return head;
 }
 
-struct node* deleteatpos(struct node* head, int pos)
+struct node* deleteatpos(struct node* head)
 {
 struct node *ptr;
 struct node *ptr1;
-int i;    
+int i,pos;    
+printf("enter position\n");
+scanf("%d",&pos);
 if (head == NULL)
 {
 printf("Linked list underflow\n");

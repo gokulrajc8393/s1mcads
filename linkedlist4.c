@@ -40,9 +40,9 @@ return head;
 }
 struct node* insertatfront(struct node* head);
 struct node* insertatlast(struct node* head);
-struct node* insertaftkey(struct node* head);
+struct node* insertafterkey(struct node* head);
 void traverse(struct node* head);
-void valuesearch(struct node* head,int val);
+void valuesearch(struct node* head);
 void main()
 {
 int ch,data,pos,val;
@@ -51,7 +51,7 @@ printf("Creating a linked list:\n");
 head=createnode(head);
 do
 {
-printf("Linked List Operations\n1.Insert Node At Front\n2.Insert Node At Last\n3.Insert After Particular Key\n4.Traversal\n5.Searching\n6.Exit\n");
+printf("Linked List Operations\n1.Insert Node At Front\n2.Insert After Particular Node\n3.Insert Node At Last\n4.Searching\n5.Traversal\n6.Exit\n");
 printf("choose an operation:\n");
 scanf("%d",&ch);
 switch(ch)
@@ -64,27 +64,25 @@ break;
 }
 case 2:
 {
-head=insertatlast(head);
-printf("value inserted at last\n");
+head=insertafterkey(head);
 break;
 }
 case 3:
 {
-head=insertaftkey(head);
+head=insertatlast(head);
+printf("value inserted at last\n");
 break;
 }
 case 4:
 {
-printf("traversing\n");
-traverse(head);
+printf("searching\n");
+valuesearch(head);
 break;
 }
 case 5:
 {
-printf("searching\n");
-printf("enter value to search\n");
-scanf("%d",&val);
-valuesearch(head,val);
+printf("traversing\n");
+traverse(head);
 break;
 }
 case 6:printf("exit\n");
@@ -142,7 +140,7 @@ ptr->next=newnode;
 return head;
 }
 
-struct node* insertaftkey(struct node* head)
+struct node* insertafterkey(struct node* head)
 {
 int value,key;
 struct node* newnode = (struct node*)malloc(sizeof(struct node));
@@ -153,7 +151,6 @@ newnode->next=NULL;
 printf("enter key\n");
 scanf("%d",&key);
 struct node *ptr;
-int i;
 if(head==NULL)
 {
 newnode->next=NULL;
@@ -203,8 +200,11 @@ printf("NULL\n");
 }
 }
 
-void valuesearch(struct node* head,int val)
+void valuesearch(struct node* head)
 {
+int val;
+printf("enter value to search\n");
+scanf("%d",&val);
 struct node *ptr;
 ptr=head;
 int flag=0,pos=1;

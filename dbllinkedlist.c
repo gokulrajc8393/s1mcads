@@ -41,7 +41,7 @@ temp->prev=p;
 }
 return head;
 }
-void searchnode(struct node* head,int value);
+void searchnode(struct node* head);
 void noofnodes(struct node* head);
 void traverse(struct node* head);
 void main()
@@ -52,23 +52,21 @@ printf("Creating a linked list:\n");
 head=createnode(head);
 do
 {
-printf("Linked List Operations\n1.Searching a node\n2.Count No Of Nodes\n3.Traversal\n4.Exit\n");
+printf("Linked List Operations\n1.Count No Of Nodes\n2.Searching a node\n3.Traversal\n4.Exit\n");
 printf("choose an operation:\n");
 scanf("%d",&ch);
 switch(ch)
 {
 case 1:
 {
-printf("searching\n");
-printf("enter value to search\n");
-scanf("%d",&val);
-searchnode(head,val);
+printf("Node Count\n");
+noofnodes(head);
 break;
 }
 case 2:
 {
-printf("Node Count\n");
-noofnodes(head);
+printf("searching\n");
+searchnode(head);
 break;
 }
 case 3:
@@ -85,11 +83,13 @@ break;
 }while(ch!=4);
 }
 
-void searchnode(struct node* head,int val)
+void searchnode(struct node* head)
 {
 struct node *ptr;
 ptr=head;
-int flag=0,pos=1;
+int flag=0,pos=1,val;
+printf("enter value to search\n");
+scanf("%d",&val);
 while(ptr!=NULL)
 {
 if(ptr->data==val)
