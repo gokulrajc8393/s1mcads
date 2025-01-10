@@ -5,11 +5,16 @@ struct node
 int data;
 struct node *next;
 };
-struct node* createnode(int n)
+struct node* createnode(struct node* head)
 {
-struct node* head;
 struct node *p;
-int value;
+int value,n;
+printf("enter size \n");
+scanf("%d",&n);
+if(n <= 0) {
+printf("List size must be greater than 0.\n");
+return 0;
+}
 for(int i=1;i<=n;i++)
 {
 struct node* temp = (struct node*)malloc(sizeof(struct node));
@@ -33,16 +38,16 @@ p->next=temp;
 }
 return head;
 }
-void deleteatfront(struct node** head);
-/*void deleteatlast(struct node** head);
-void deleteatpos(struct node** head,int pos);*/
+struct node* deleteatfront(struct node* head);
+struct node* deleteatlast(struct node* head);
+struct node* deleteatpos(struct node* head);
 void traverse(struct node* head);
 void main()
 {
-int n,ch,data,pos,val;
-printf("enter size \n");
-scanf("%d",&n);
-struct node *new=createnode(n);
+int ch,data,pos,val;
+struct node *head=NULL;
+printf("Creating a linked list:\n");
+head=createnode(head);
 do
 {
 printf("Linked List Operations\n1.Delete From Front\n2.Delete From Last\n3.Delete From Particular Position\n4.Traversal\n5.Exit\n");
@@ -52,27 +57,25 @@ switch(ch)
 {
 case 1:
 {
-deleteatfront(&new);
+head=deleteatfront(head);
 printf("value deleted from front\n");
 break;
 }
-/*case 2:
+case 2:
 {
-deleteatlast(&head);
+head=deleteatlast(head);
 printf("value deleted from last\n");
 break;
 }
 case 3:
 {
-printf("enter position\n");
-scanf("%d",&pos);
-deleteatpos(&head,pos);
+head=deleteatpos(head);
 break;
-}*/
+}
 case 4:
 {
 printf("traversing\n");
-traverse(new);
+traverse(head);
 break;
 }
 case 5:printf("exit\n");
@@ -83,7 +86,7 @@ break;
 }while(ch!=5);
 }
 
-void deleteatfront(struct node** head)
+struct node* deleteatfront(struct node* head)
 {
 if(head==NULL)
 {
@@ -92,13 +95,14 @@ printf("linked list underflow\n");
 else
 {
 struct node *ptr;
-ptr=*head;
-*head=ptr->next;
+ptr=head;
+head=ptr->next;
 free(ptr);
 }
+return head;
 }
-/*
-void insertatlast(struct node** head,int data)
+
+struct node* deleteatlast(struct node* head)
 {
 if(head==NULL)
 {
@@ -113,49 +117,61 @@ free(head);
 }
 else
 {
-
-}
-}
-}
-
-void insertatpos(struct node** head,int data,int pos)
-{
-struct node* newnode = createnode(data);
 struct node *ptr;
-int i;
-if(head==NULL)
+struct node *ptr1;
+ptr=head;
+while(ptr->next!=NULL)
 {
-newnode->next=NULL;
-*head=newnode;
+ptr1=ptr;
+ptr=ptr->next;
 }
-else
-{
+ptr1->next=NULL;
+free(ptr);
+}
+}
+return head;
+}
 
-if(pos==1)
+struct node* deleteatpos(struct node* head)
 {
-newnode->next=*head;
-*head=newnode;
-printf("value inserted at position\n");
+struct node *ptr;
+struct node *ptr1;
+int i,pos;    
+printf("enter position\n");
+scanf("%d",&pos);
+if (head == NULL)
+{
+printf("Linked list underflow\n");
+return head;
+}
+if (pos==1)
+{
+ptr=head;
+head=ptr->next;
+free(ptr);
+printf("Value deleted from position\n");
 }
 else
 {
-ptr=*head;
+ptr = head;
 for(i=1;i<pos-1&&ptr!=NULL;i++)  
 {  
-ptr=ptr->next; 
-if(ptr == NULL)  
-{    
-printf("\nPosition out of range\n"); 
-return;  
-}         
-}  
-newnode->next=ptr->next;  
-ptr->next=newnode;  
-printf("value inserted at position\n");
+ptr = ptr->next; 
 }
+if (ptr==NULL||ptr->next==NULL)
+{
+printf("Position out of range\n");
+return head;
 }
+ptr1 = ptr->next;
+ptr->next = ptr1->next;
+free(ptr1);
+printf("Value deleted from position\n");
 }
-*/
+return head;
+}
+
+
 void traverse(struct node* head)
 {
 struct node *ptr;
