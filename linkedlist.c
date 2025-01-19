@@ -175,7 +175,7 @@ for(i=1;i<pos-1&&ptr!=NULL;i++)
 {  
 ptr=ptr->next; 
 }  
-if(ptr == NULL)  
+if(ptr==NULL||ptr->next==NULL)  
 {    
 printf("\nPosition out of range\n");   
 }  
