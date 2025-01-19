@@ -43,11 +43,6 @@ if(front==-1 && rear==-1)
 {
 front=rear=0;
 }
-else
-if(front==-1&&rear==-1) 
-{
-front=rear=0;
-} 
 else 
 {
 rear=(rear+1)%size;
